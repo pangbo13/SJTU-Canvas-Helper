@@ -20,6 +20,7 @@ async function resolvePortable() {
   const releaseDir = target
     ? `./src-tauri/target/${target}/release`
     : `./src-tauri/target/release`;
+  const configDir = path.join(releaseDir, ".config");
 
   if (!(await fs.pathExists(releaseDir))) {
     throw new Error("could not found the release dir");
@@ -31,6 +32,7 @@ async function resolvePortable() {
   const zip = new AdmZip();
 
   zip.addLocalFile(path.join(releaseDir, "SJTU Canvas Helper.exe"));
+  zip.addLocalFolder(configDir, ".config");
 
   const require = createRequire(import.meta.url);
   const packageJson = require("../package.json");
