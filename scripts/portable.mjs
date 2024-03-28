@@ -35,8 +35,8 @@ async function resolvePortable() {
   zip.addLocalFolder(configDir, ".config");
 
   const require = createRequire(import.meta.url);
-  const packageJson = require("../package.json");
-  const { version } = packageJson;
+  const packageJson = require("../src-tauri/tauri.conf.json");
+  const { version } = packageJson["package"];
 
   const zipFile = target
     ? `SJTU.Canvas.Helper_${version}_${ARCH_MAP[target]}_portable.zip`
