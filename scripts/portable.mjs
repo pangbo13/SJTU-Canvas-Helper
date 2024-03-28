@@ -29,14 +29,14 @@ async function resolvePortable() {
   await fs.mkdir(configDir);
   await fs.createFile(path.join(configDir, "PORTABLE"));
 
-  const zip = new AdmZip();
-
-  zip.addLocalFile(path.join(releaseDir, "SJTU Canvas Helper.exe"));
-  zip.addLocalFolder(configDir, ".config");
-
   const require = createRequire(import.meta.url);
   const packageJson = require("../src-tauri/tauri.conf.json");
-  const { version } = packageJson["package"];
+  const { version, productName } = packageJson["package"];
+
+  const zip = new AdmZip();
+
+  zip.addLocalFile(path.join(releaseDir, `${productName}.exe`));
+  zip.addLocalFolder(configDir, ".config");
 
   const zipFile = target
     ? `SJTU.Canvas.Helper_${version}_${ARCH_MAP[target]}_portable.zip`
