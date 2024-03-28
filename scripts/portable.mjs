@@ -20,7 +20,6 @@ async function resolvePortable() {
   const releaseDir = target
     ? `./src-tauri/target/${target}/release`
     : `./src-tauri/target/release`;
-  const configDir = path.join(releaseDir, ".config");
 
   if (!(await fs.pathExists(releaseDir))) {
     throw new Error("could not found the release dir");
@@ -31,17 +30,15 @@ async function resolvePortable() {
 
   const zip = new AdmZip();
 
-  zip.addLocalFile(path.join(releaseDir, "Clash Verge.exe"));
-  zip.addLocalFile(path.join(releaseDir, "clash-meta.exe"));
-  zip.addLocalFile(path.join(releaseDir, "clash-meta-alpha.exe"));
-  zip.addLocalFolder(path.join(releaseDir, "resources"), "resources");
-  zip.addLocalFolder(configDir, ".config");
+  zip.addLocalFile(path.join(releaseDir, "SJTU Canvas Helper.exe"));
 
   const require = createRequire(import.meta.url);
   const packageJson = require("../package.json");
   const { version } = packageJson;
 
-  const zipFile = `Clash.Verge_${version}_${ARCH_MAP[target]}_portable.zip`;
+  const zipFile = target
+    ? `SJTU.Canvas.Helper_${version}_${ARCH_MAP[target]}_portable.zip`
+    : `SJTU.Canvas.Helper_${version}_portable.zip`;
   zip.writeZip(zipFile);
 
   console.log("[INFO]: create portable zip successfully");

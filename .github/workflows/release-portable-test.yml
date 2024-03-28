@@ -22,7 +22,8 @@ jobs:
           #   target: x86_64-apple-darwin
           # - os: ubuntu-20.04
           - os: windows-latest
-    runs-on: ${{ matrix.os }}
+            target: x86_64-pc-windows-msvc
+    runs-on: ${{ matrix.os }}d
 
     steps:
       - uses: actions/checkout@v4
@@ -67,7 +68,7 @@ jobs:
 
       - name: Portable Bundle
         if: matrix.os == 'windows-latest'
-        run: npm portable ${{ matrix.target }}
+        run: npm run portable ${{ matrix.target }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
