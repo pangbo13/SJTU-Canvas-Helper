@@ -1,21 +1,34 @@
-name: Windows Portable Bundle
-on:
-  workflow_call:
-jobs:
-  my-job:
-    runs-on: windows-latest
-    steps:
+name: 'Windows Portable Action'
+description: 'A composite action for the Windows Portable Bundle workflow'
+inputs:
+  working-directory:
+    description: 'Relative path of the working directory'
+    required: false
+    default: '.'
+runs:
+  using: "composite"
+  steps:
     - name: Disable updater
       run: node ./.github/workflows/windows-portable/disable-updater.mjs
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Cleanup target
       run: rm ./src-tauri/target/release/*.exe
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Build
       run: yarn tauri build
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Bundle and upload
       run: node ./.github/workflows/windows-portable/portable.mjs
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
 
     - name: Restore config
       run: node ./.github/workflows/windows-portable/restore-config.mjs
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
