@@ -5,6 +5,14 @@ inputs:
     description: 'Relative path of the working directory'
     required: false
     default: '.'
+  target:
+    description: 'The target to build for'
+    required: false
+    default: 'x86_64-pc-windows-msvc'
+  version-template:
+    description: 'The version template to use'
+    required: false
+    default: 'v__VERSION__'
 runs:
   using: "composite"
   steps:
@@ -28,7 +36,7 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - name: Bundle and upload
-      run: node ./.github/workflows/windows-portable/portable.mjs
+      run: node ./.github/workflows/windows-portable/portable.mjs ${{ inputs.target }} ${{ inputs.version-template }}
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 

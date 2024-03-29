@@ -70,6 +70,9 @@ jobs:
       - name: Portable Bundle
         if: matrix.os == 'windows-latest'
         uses: ./.github/workflows/windows-portable
+        with:
+          target: ${{ matrix.target }}
+          version-template: 'app-v__VERSION__'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
