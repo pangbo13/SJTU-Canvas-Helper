@@ -1,7 +1,6 @@
 import fs from "fs-extra";
 import path from "path";
 import AdmZip from "adm-zip";
-import { createRequire } from "module";
 import { getOctokit, context } from "@actions/github";
 
 const target = process.argv.slice(2)[0];
@@ -29,8 +28,8 @@ async function resolvePortable() {
   await fs.mkdir(configDir);
   await fs.createFile(path.join(configDir, "PORTABLE"));
 
-  const require = createRequire(import.meta.url);
-  const packageJson = require("../src-tauri/tauri.conf.json");
+  const configPath = "./src-tauri/tauri.conf.json";
+  const packageJson = await fs.readJson(configPath);
   const { version, productName } = packageJson["package"];
 
   const zip = new AdmZip();
