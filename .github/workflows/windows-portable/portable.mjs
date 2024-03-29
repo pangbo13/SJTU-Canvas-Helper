@@ -8,11 +8,11 @@ const tagTemplate = process.argv.slice(2)[1] ?? "v__VERSION__";
 
 const ARCH_MAP = {
   "x86_64-pc-windows-msvc": "x64",
+  "i686-pc-windows-msvc": "x86",
   "aarch64-pc-windows-msvc": "arm64",
 };
 
-/// Script for ci
-/// 打包绿色版/便携版 (only Windows)
+// 打包绿色版/便携版 (only Windows)
 async function resolvePortable() {
   if (process.platform !== "win32") return;
 
