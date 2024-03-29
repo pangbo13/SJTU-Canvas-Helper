@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 
 async function disableUpdater() {
-    const configPath = "./src-tauri/src-tauri/tauri.conf.json";
+    const configPath = "./src-tauri/tauri.conf.json";
     if (!(await fs.pathExists(configPath))) {
         throw new Error("could not found the tauri.conf.json");
     }

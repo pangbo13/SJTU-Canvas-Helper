@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 
 async function restoreConfig() {
-    const configPath = "./src-tauri/src-tauri/tauri.conf.json";
+    const configPath = "./src-tauri/tauri.conf.json";
     if (!(await fs.pathExists(configPath + ".bak"))) {
         throw new Error("could not found the tauri.conf.json.bak");
     }
