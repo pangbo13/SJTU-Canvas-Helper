@@ -69,7 +69,7 @@ jobs:
 
       - name: Portable Bundle
         if: matrix.os == 'windows-latest'
-        run: npm run portable ${{ matrix.target }} app-v__VERSION__
+        uses: ./.github/workflows/windows-portable/windows-portable.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}

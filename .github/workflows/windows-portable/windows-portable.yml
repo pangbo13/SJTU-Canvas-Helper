@@ -1,0 +1,21 @@
+name: Windows Portable Bundle
+on:
+  workflow_call:
+jobs:
+  my-job:
+    runs-on: windows-latest
+    steps:
+    - name: Disable updater
+      run: node ./.github/workflows/windows-portable/disable-updater.mjs
+
+    - name: Cleanup target
+      run: rm ./src-tauri/target/release/*.exe
+
+    - name: Build
+      run: yarn tauri build
+
+    - name: Bundle and upload
+      run: node ./.github/workflows/windows-portable/portable.mjs
+
+    - name: Restore config
+      run: node ./.github/workflows/windows-portable/restore-config.mjs
