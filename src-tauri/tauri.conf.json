@@ -36,7 +36,7 @@
       "endpoints": [
         "https://github.com/Okabe-Rintarou-0/SJTU-Canvas-Helper/releases/download/latest/latest.json"
       ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEE4QzdGREIxQzE4Qzk0M0IKUldRN2xJekJzZjNIcUg1UzZLQ0hjZW55by9qSTNIOVNVVjFNYzZOVGNiSXRuUXpGcDEwRW5UWU8K",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDlBNDQ2MDFFNDc4Qzk5RTEKUldUaG1ZeEhIbUJFbW9BMk85WFQrYzBTclZKNHdsS2xDYWp6M1h0MjRWR0hGWE5LOXgwdW9XWFQK",
       "windows": {
         "installMode": "passive",
         "installerArgs": []

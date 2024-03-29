@@ -23,6 +23,8 @@ jobs:
           - os: ubuntu-20.04
           - os: windows-latest
             target: x86_64-pc-windows-msvc
+          - os: windows-latest
+            target: i686-pc-windows-msvc
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -41,6 +43,8 @@ jobs:
         uses: swatinem/rust-cache@v2
         with:
           workspaces: "./src-tauri -> target"
+          key: ${{ matrix.os }}-${{ matrix.target }}
+
       - if: matrix.target
         run: rustup target add ${{ matrix.target }}
 
@@ -69,7 +73,10 @@ jobs:
 
       - name: Portable Bundle
         if: matrix.os == 'windows-latest'
-        run: npm run portable ${{ matrix.target }} app-v__VERSION__
+        uses: ./.github/workflows/windows-portable
+        with:
+          target: ${{ matrix.target }}
+          version-template: 'app-v__VERSION__'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_PRIVATE_KEY: ${{ secrets.TAURI_PRIVATE_KEY }}
