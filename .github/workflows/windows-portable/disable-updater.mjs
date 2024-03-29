@@ -11,11 +11,11 @@ async function disableUpdater() {
     // load config
     const config = await fs.readJson(configPath);
     // modify config
-    config.updater = {
+    config.tauri.updater = {
         active: false,
         dialog: false
     };
-    config.bundle = {
+    config.tauri.bundle = {
         active: false
     };
     // save modified config
